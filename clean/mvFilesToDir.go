@@ -6,17 +6,17 @@ import (
 	"os/user"
 	"path/filepath"
 	"strings"
+
+	"github.com/Grewather/go-file-agregator/system"
 )
 
 
 func isInArray(search string, array []string) bool {
     for _, item := range array {
         if item == search {
-            fmt.Printf("Found extension: %s\n", search)
             return true
         }
     }
-    fmt.Printf("Extension not found: %s\n", search)
     return false
 }
 
@@ -68,22 +68,24 @@ func checkExtension(filePath string) {
     case isInArray(extension, MultimediaExtensions):
         err := mvFilesToDir(filePath, filepath.Join(multimediaFolder, filepath.Base(filePath)))
         if err != nil {
-            fmt.Println("Error moving file:", err)
+            system.ShowMessageBox("Error moving file:" + err.Error())
         }
     case isInArray(extension, DocsExtensions):
         err := mvFilesToDir(filePath, filepath.Join(docsFolder, filepath.Base(filePath)))
         if err != nil {
-            fmt.Println("Error moving file:", err)
+            system.ShowMessageBox("Error moving file:" + err.Error())
         }
     case isInArray(extension, AppExtensions):
         err := mvFilesToDir(filePath, filepath.Join(appFolder, filepath.Base(filePath)))
         if err != nil {
-            fmt.Println("Error moving file:", err)
+            system.ShowMessageBox("Error moving file:" + err.Error())
+            
         }
     case isInArray(extension, ArchiveExtensions):
         err := mvFilesToDir(filePath, filepath.Join(archiveFolder, filepath.Base(filePath)))
         if err != nil {
-            fmt.Println("Error moving file:", err)
+            system.ShowMessageBox("Error moving file:" + err.Error())
+            
         }
     }
 }

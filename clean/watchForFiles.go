@@ -7,13 +7,14 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/Grewather/go-file-agregator/system"
 	"github.com/radovskyb/watcher"
 )
 
 func getDownloadDir() string {
 	u, err := user.Current()
 	if err != nil {
-		log.Fatalf("Error getting the current user: %v", err)
+		system.ShowMessageBox("Error getting the current user: " + err.Error())
 	}
 
 	downloadDir := filepath.Join(u.HomeDir, "Downloads")
@@ -26,7 +27,7 @@ func WatchForDownloads() {
 	w := watcher.New()
 
 	if err := w.AddRecursive(downloadDir); err != nil {
-		log.Fatalf("Error when adding a directory to be monitored: %v", err)
+		system.ShowMessageBox("Error when adding a directory to be monitored" + err.Error())
 	}
 
 	go func() {
@@ -50,7 +51,7 @@ func WatchForDownloads() {
 	}()
 
 	if err := w.Start(250 * time.Millisecond); err != nil {
-		log.Fatalf("Error starting the monitoring: %v", err)
+		system.ShowMessageBox("Error starting the monitoring"+  err.Error())
 	}
 
 	select {}
