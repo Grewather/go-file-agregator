@@ -5,5 +5,5 @@ go-file-agregator is script that categorizes files based on their extensions and
 ## Todo:
 
 - [ ] Add error handling
-- [x] Add configs (maybe log files in the future)
+- [ ] Add configs (maybe log files in the future)
 - [ ] Better readme
